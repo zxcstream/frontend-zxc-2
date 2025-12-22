@@ -51,11 +51,11 @@ export default function RootLayout({
             `,
           }}
         />
-        <Script
+        {/* <Script
           src="https://cdn.jsdelivr.net/npm/disable-devtool@latest"
           strategy="beforeInteractive"
           disable-devtool-auto=""
-        />
+        /> */}
         <meta name="apple-mobile-web-app-title" content="ZXC" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta

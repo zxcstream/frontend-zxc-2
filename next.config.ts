@@ -26,7 +26,7 @@ const nextConfig: NextConfig = {
             key: "Content-Security-Policy",
             value: `
             default-src 'self';
-           script-src 'self' 'unsafe-inline' https://www.youtube.com;
+           script-src 'self' 'unsafe-inline' https://www.youtube.com https://www.googletagmanager.com/;
             connect-src 'self' https://api.themoviedb.org;
             img-src 'self' https://image.tmdb.org data:;
             style-src 'self' 'unsafe-inline';
@@ -53,7 +53,7 @@ const nextConfig: NextConfig = {
             key: "Content-Security-Policy",
             value: `
             default-src 'self';
-             script-src 'self' 'unsafe-inline' https://www.youtube.com;
+             script-src 'self' 'unsafe-inline' https://www.youtube.com https://www.googletagmanager.com/;
         connect-src 'self' https://api.themoviedb.org https://image.tmdb.org https://www.youtube.com;
             img-src 'self' https://image.tmdb.org data:;
           frame-src 'self'

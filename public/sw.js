@@ -5,6 +5,12 @@ const RUNTIME_CACHE = `zxc-runtime-${VERSION}`;
 // Files to cache immediately on install
 const PRECACHE_URLS = ["/", "/offline.html"];
 
+const BYPASS_DOMAINS = [
+  "www.googletagmanager.com",
+  "www.google-analytics.com",
+  "analytics.google.com",
+];
+
 // Install event - cache essential files
 self.addEventListener("install", (event) => {
   event.waitUntil(
@@ -37,6 +43,11 @@ self.addEventListener("activate", (event) => {
 self.addEventListener("fetch", (event) => {
   const { request } = event;
   const url = new URL(request.url);
+
+  // 1️⃣ Bypass analytics / GA domains
+  if (BYPASS_DOMAINS.includes(url.hostname)) {
+    return; // Let browser handle it
+  }
 
   // Strategy 1: Network First for API calls (TMDB)
   if (url.hostname === "api.themoviedb.org") {
