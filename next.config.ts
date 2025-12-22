@@ -27,7 +27,7 @@ const nextConfig: NextConfig = {
             value: `
             default-src 'self';
            script-src 'self' 'unsafe-inline' https://www.youtube.com https://www.googletagmanager.com/;
-            connect-src 'self' https://api.themoviedb.org;
+            connect-src 'self' https://api.themoviedb.org https://www.google-analytics.com;
             img-src 'self' https://image.tmdb.org data:;
             style-src 'self' 'unsafe-inline';
          frame-src 'self'
@@ -54,7 +54,7 @@ const nextConfig: NextConfig = {
             value: `
             default-src 'self';
              script-src 'self' 'unsafe-inline' https://www.youtube.com https://www.googletagmanager.com/;
-        connect-src 'self' https://api.themoviedb.org https://image.tmdb.org https://www.youtube.com;
+        connect-src 'self' https://api.themoviedb.org https://image.tmdb.org https://www.youtube.com https://www.google-analytics.com;
             img-src 'self' https://image.tmdb.org data:;
           frame-src 'self'
   https://zxcstream.xyz
