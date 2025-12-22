@@ -29,7 +29,7 @@ export default function SearchModal() {
   const inputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
   const pathname = usePathname();
-  const [lastPage, setLastPage] = useState("/");
+  const [lastPage, setLastPage] = useState("/home");
   const searchParams = useSearchParams();
   const query = searchParams.get("query");
   const [text, setText] = useState(query ?? "");
@@ -127,7 +127,7 @@ export default function SearchModal() {
               <IconCaretUpDown />
             </Button>
           </PopoverTrigger>
-          <PopoverContent className="w-[150px] p-0">
+          <PopoverContent className="w-37.5 p-0">
             <Command>
               <CommandList>
                 <CommandEmpty>No type found.</CommandEmpty>
