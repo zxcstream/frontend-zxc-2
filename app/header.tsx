@@ -92,7 +92,7 @@ export default function Header() {
               <div className="flex justify-between lg:py-4 px-6 py-2 items-center col-span-2 ">
                 <Link
                   scroll={false}
-                  href="https://www.facebook.com"
+                  href="https://www.facebook.com/profile.php?id=61567135169478"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="p-2 rounded-full bg-[#1877F2] text-white hover:bg-[#165ec9] transition-colors"
@@ -103,7 +103,7 @@ export default function Header() {
                 {/* Telegram */}
                 <Link
                   scroll={false}
-                  href="https://t.me/yourchannel"
+                  href={"https://t.me/zxc_stream"}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="p-2 rounded-full bg-[#0088cc] text-white hover:bg-[#007ab8] transition-colors"
@@ -114,7 +114,7 @@ export default function Header() {
                 {/* Discord */}
                 <Link
                   scroll={false}
-                  href="https://discord.com"
+                  href={"https://discord.gg/yv7wJV97Jd"}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="p-2 rounded-full bg-[#5865F2] text-white hover:bg-[#4752c4] transition-colors"

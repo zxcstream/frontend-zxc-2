@@ -80,7 +80,7 @@ export default function SearchResult() {
     window.scrollTo({ top: 0, behavior: "auto" });
   }, [query]);
   return (
-    <div className="relative flex flex-col items-center min-h-[calc(100dvh-390px)] lg:pt-30 pt-20 max-w-[90%] mx-auto space-y-10 ">
+    <div className="relative flex flex-col items-center min-h-[calc(100dvh-390px)] lg:pt-30 pt-20 lg:w-[90%] w-[95%] mx-auto lg:space-y-10 space-y-5 ">
       {isKeyword &&
         (isLoading ? (
           <div className="grid lg:grid-cols-7 grid-cols-3 w-full lg:gap-4 gap-2">
