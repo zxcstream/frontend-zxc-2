@@ -1,5 +1,6 @@
 import { IMAGE_BASE_URL } from "@/constants/tmdb";
 import useHoverSound from "@/hook/sound-hover-hook";
+import { useClickStore } from "@/store/ad-store";
 import { MovieTypes } from "@/types/movie-by-id";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
@@ -14,7 +15,7 @@ export default function MovieCard({
   const searchParams = useSearchParams();
   const paramsObject = Object.fromEntries(searchParams.entries());
   const playHover = useHoverSound("/keyboard.wav");
-
+  const incrementClick = useClickStore((state) => state.incrementClick);
   const date = movie.release_date ?? movie.first_air_date;
   const isRecent =
     date && Date.now() - new Date(date).getTime() <= 30 * 24 * 60 * 60 * 1000;
@@ -28,6 +29,7 @@ export default function MovieCard({
       }}
       scroll={false}
       prefetch
+      onClick={incrementClick}
     >
       <div
         onClick={playHover}
