@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Provider from "./provider";
+import Script from "next/script";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,6 +33,29 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        {/* Google Analytics Scripts */}
+        <Script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-FW6C6N98F8"
+          strategy="afterInteractive"
+        />
+        <Script
+          id="google-analytics"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-FW6C6N98F8');
+            `,
+          }}
+        />
+        <Script
+          src="https://cdn.jsdelivr.net/npm/disable-devtool@latest"
+          strategy="beforeInteractive"
+          disable-devtool-auto=""
+        />
         <meta name="apple-mobile-web-app-title" content="ZXC" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta
