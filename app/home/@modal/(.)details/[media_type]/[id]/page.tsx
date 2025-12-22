@@ -43,6 +43,7 @@ import Image from "next/image";
 import { MediaSkeleton } from "./skeleton";
 import Link from "next/link";
 import { useIsMobile } from "@/hook/use-mobile";
+import { useClickStore } from "@/store/ad-store";
 export default function Modal() {
   const searchParams = useSearchParams();
   const queryUrl = searchParams.get("query");
@@ -81,7 +82,7 @@ export default function Modal() {
   const season = useLastPlayed((s) => s.season);
   const episode = useLastPlayed((s) => s.episode);
   const isMainPlayerActive = useLastPlayed((s) => s.isMainPlayerActive);
-
+  const incrementClick = useClickStore((s) => s.incrementClick);
   // console.log(
   //   "2323",
   //   lastId,
@@ -274,6 +275,7 @@ export default function Modal() {
                             }
                       );
                       setMainPlayerActive(true);
+                      incrementClick();
                     }}
                   >
                     {isMainPlayerActive &&

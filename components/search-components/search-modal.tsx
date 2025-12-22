@@ -29,7 +29,7 @@ export default function SearchModal() {
   const inputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
   const pathname = usePathname();
-  const [lastPage, setLastPage] = useState(pathname);
+  const [lastPage, setLastPage] = useState("/");
   const searchParams = useSearchParams();
   const query = searchParams.get("query");
   const [text, setText] = useState(query ?? "");
@@ -47,28 +47,28 @@ export default function SearchModal() {
     }
   }, [pathname]);
   console.log("lastPage", lastPage);
-  useEffect(() => {
-    const trimmed = text.trim();
+  // useEffect(() => {
+  //   const trimmed = text.trim();
 
-    // ✅ If on home + no search → do nothing
-    if (!trimmed && isHome) return;
+  //   // ✅ If on home + no search → do nothing
+  //   if (!trimmed && isHome) return;
 
-    // ✅ Clear search → go back to last page
-    if (!trimmed) {
-      router.replace(lastPage, { scroll: false });
-      return;
-    }
+  //   // ✅ Clear search → go back to last page
+  //   if (!trimmed) {
+  //     router.replace(lastPage, { scroll: false });
+  //     return;
+  //   }
 
-    // ✅ Avoid replacing with same URL
-    const nextUrl = `/home/search?type=${value}&query=${encodeURIComponent(
-      trimmed
-    )}`;
-    const currentUrl = `${pathname}?${searchParams.toString()}`;
+  //   // ✅ Avoid replacing with same URL
+  //   const nextUrl = `/home/search?type=${value}&query=${encodeURIComponent(
+  //     trimmed
+  //   )}`;
+  //   const currentUrl = `${pathname}?${searchParams.toString()}`;
 
-    if (nextUrl !== currentUrl) {
-      router.replace(nextUrl, { scroll: false });
-    }
-  }, [text, value]);
+  //   if (nextUrl !== currentUrl) {
+  //     router.replace(nextUrl, { scroll: false });
+  //   }
+  // }, [text, value]);
 
   // useEffect(() => {
   //   if (text.trim().length === 0) {
@@ -78,8 +78,20 @@ export default function SearchModal() {
 
   //   router.replace(`/search?type=${value}&query=${encodeURIComponent(text)}`);
   // }, [text, value, lastPage]);
-  const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
-    setText(e.target.value);
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const values = e.target.value;
+    setText(values);
+
+    if (values.trim()) {
+      router.push(
+        `/home/search?type=${value}&query=${encodeURIComponent(values)}`,
+        {
+          scroll: false,
+        }
+      );
+    } else {
+      router.push(lastPage);
+    }
   };
   return (
     <div className="relative flex items-center">
@@ -98,7 +110,7 @@ export default function SearchModal() {
               ? "Search Movie..."
               : "Search TV Shows..."
           }
-          onChange={handleSearch}
+          onChange={handleSearchChange}
           className="lg:w-sm w-full pr-28 pl-12 lg:text-base text-sm"
         />
       </SpotlightBorderWrapper>

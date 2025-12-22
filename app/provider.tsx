@@ -9,18 +9,18 @@ import logo from "@/assets/zxczxc.svg";
 export default function Provider({ children }: { children: React.ReactNode }) {
   const [isMounted, setIsMounted] = useState(false);
   const [queryClient] = useState(() => new QueryClient());
-  useEffect(() => {
-    const unsubscribe = queryClient.getQueryCache().subscribe(() => {
-      const keys = queryClient
-        .getQueryCache()
-        .getAll()
-        .map((q) => q.queryKey);
+  // useEffect(() => {
+  //   const unsubscribe = queryClient.getQueryCache().subscribe(() => {
+  //     const keys = queryClient
+  //       .getQueryCache()
+  //       .getAll()
+  //       .map((q) => q.queryKey);
 
-      console.log("🔄 Cache updated:", keys);
-    });
+  //     console.log("🔄 Cache updated:", keys);
+  //   });
 
-    return unsubscribe;
-  }, [queryClient]);
+  //   return unsubscribe;
+  // }, [queryClient]);
 
   useEffect(() => {
     if ("serviceWorker" in navigator) {
