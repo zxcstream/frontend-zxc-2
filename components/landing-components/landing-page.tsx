@@ -18,6 +18,7 @@ import { useSearchParams } from "next/navigation";
 import SkeletonLanding from "./skeleton";
 import LandingContent from "./content";
 import { useEffect, useMemo, useRef } from "react";
+import { useLastPlayed } from "@/store/now-playing-store";
 
 export default function LandingPage() {
   const searchParams = useSearchParams();
@@ -25,16 +26,44 @@ export default function LandingPage() {
   const isSearching = Boolean(search);
 
   const { index, setIndex } = useLandingSwiper();
+  // const custom_list = useMemo(() => {
+  //   return shuffleArray([
+  //     { id: 1062722, media_type: "movie" },
+  //     { id: 1242898, media_type: "movie" },
+  //     { id: 1402, media_type: "tv" },
+  //     { id: 95557, media_type: "tv" },
+  //     { id: 114410, media_type: "tv" },
+  //     { id: 14836, media_type: "movie" },
+  //   ]);
+  // }, []);
+
+  const lastId = useLastPlayed((s) => s.lastId);
+  const lastMediaType = useLastPlayed((s) => s.media_type);
   const custom_list = useMemo(() => {
-    return shuffleArray([
+    const baseList = [
       { id: 1062722, media_type: "movie" },
       { id: 1242898, media_type: "movie" },
       { id: 1402, media_type: "tv" },
       { id: 95557, media_type: "tv" },
       { id: 114410, media_type: "tv" },
       { id: 14836, media_type: "movie" },
-    ]);
-  }, []);
+    ];
+
+    // inject last played ONLY if valid
+    if (lastId && lastMediaType) {
+      // remove duplicates just in case
+      const filtered = baseList.filter(
+        (item) => !(item.id === lastId && item.media_type === lastMediaType)
+      );
+
+      return shuffleArray([
+        { id: lastId, media_type: lastMediaType },
+        ...filtered,
+      ]);
+    }
+
+    return shuffleArray(baseList);
+  }, [lastId, lastMediaType]);
 
   const swiperRef = useRef<SwiperType | null>(null);
   const query = useReusableApi({
@@ -55,6 +84,7 @@ export default function LandingPage() {
     <Swiper
       spaceBetween={30}
       effect={"fade"}
+      loop={true}
       navigation={true}
       keyboard={{
         enabled: true,
@@ -69,7 +99,11 @@ export default function LandingPage() {
       }}
       modules={[EffectFade, Navigation, Pagination, Keyboard, Autoplay]}
       initialSlide={index}
-      onSlideChange={(s) => setIndex(s.activeIndex)}
+      // onSlideChange={(s) => setIndex(s.activeIndex)}
+      onSlideChange={(s) => {
+        // IMPORTANT: use realIndex when loop is enabled
+        setIndex(s.realIndex);
+      }}
     >
       {query.map((meow, idx) => {
         const data = meow.data;
