@@ -90,7 +90,7 @@ export default function DiscoverResult() {
               <IconGhost2Filled />
             </div>
 
-            <div className="text-center leading-loose">
+            <div className="text-center leading-loose font-medium">
               <h1 className="font-medium">No more results</h1>
               <p className="text-muted-foreground  text-sm  max-w-xs">
                 That’s all we have for now.

@@ -1,5 +1,6 @@
 "use client";
 import { Separator } from "@/components/ui/separator";
+import { IconBookmark } from "@tabler/icons-react";
 import { Film, LucideIcon, Sword, Swords, Telescope, Tv } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -30,6 +31,11 @@ export default function ContentState() {
       label: "Discover",
       link: "/home/discover",
       icon: Telescope,
+    },
+    {
+      label: "Watchlist",
+      link: "/home/watchlist",
+      icon: IconBookmark,
     },
   ];
   return (
